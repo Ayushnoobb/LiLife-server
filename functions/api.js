@@ -14,8 +14,17 @@ const users = db.collection("user");
 
 
 
-router.get("/" , (req , res) => {
-    res.redirect("/admin")
+router.get("/" , async (req , res) => {
+  try{
+    await client.connect()
+    res.json({"message" : "hello"})
+  }catch (error){
+    res.send("error");
+    console.log("error");
+  }
+  finally{
+    client.close;
+  }
 })
 
 router.get("/api/products/:id",async(req , res) =>{
